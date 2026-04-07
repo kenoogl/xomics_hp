@@ -11,6 +11,9 @@ title: "リンク / Links"
 | 九州大学大学院システム情報科学研究院<br>Graduate School and Faculty of Information Science and Electrical Engineering | [https://www.isee.kyushu-u.ac.jp](https://www.isee.kyushu-u.ac.jp) |
 | 九州大学洋上風力研究教育センター<br/>Research and Education Center for Offshore Wind Kyushu University | [https://recow.kyushu-u.ac.jp](https://recow.kyushu-u.ac.jp) |
 | 九州大学マテリアル先端リサーチインフラ<br>Advanced Research Infrastructure for Materials and Nanotechnology (ARIM) | [https://nano.kyushu-u.ac.jp/arim/](https://nano.kyushu-u.ac.jp/arim/) |
+| 九州大学生体防御医学研究所<br>Medical Institute of Bioregulation | [http://www.bioreg.kyushu-u.ac.jp/index.html](http://www.bioreg.kyushu-u.ac.jp/index.html) |
+| 九州大学応用力学研究所<br>Research Institute for Applied Mechanics | [http://www.riam.kyushu-u.ac.jp/](http://www.riam.kyushu-u.ac.jp/) |
+| 九州大学先導物質化学研究所<br>Institute for Materials Chemistry and Engineering | [http://www.cm.kyushu-u.ac.jp/](http://www.cm.kyushu-u.ac.jp/) |
 | 九州大学数理・データサイエンス教育研究センター<br>Center for Mathematics-and-Data-Science Education and Research (MDS) | [https://mds.kyushu-u.ac.jp/](https://mds.kyushu-u.ac.jp/) |
 | 九州大学マス・フォア・インダストリー研究所 (IMI)<br>Institute of Mathematics for Industry | [https://www.imi.kyushu-u.ac.jp/](https://www.imi.kyushu-u.ac.jp/) |
 | 九州大学共創学部<br>School of Interdisciplinary Science and Innovation | [https://www.kyoso.kyushu-u.ac.jp/](https://www.kyoso.kyushu-u.ac.jp/) |
