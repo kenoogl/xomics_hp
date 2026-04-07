@@ -43,5 +43,5 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-          PRODUCTION_TARGET_DIR: /var/www/html
+          PRODUCTION_TARGET_DIR: /var/www/clam
         run: ./scripts/deploy_production.sh

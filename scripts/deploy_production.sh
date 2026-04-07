@@ -5,7 +5,7 @@ set -euo pipefail
 : "${DEPLOY_USER:?DEPLOY_USER is required}"
 
 DEPLOY_PORT="${DEPLOY_PORT:-22}"
-TARGET_DIR="${PRODUCTION_TARGET_DIR:-/var/www/html}"
+TARGET_DIR="${PRODUCTION_TARGET_DIR:-/var/www/clam}"
 SSH_OPTS="-p ${DEPLOY_PORT} -o StrictHostKeyChecking=no"
 
 rsync -az --delete -e "ssh ${SSH_OPTS}" public/ "${DEPLOY_USER}@${DEPLOY_HOST}:${TARGET_DIR}/"
