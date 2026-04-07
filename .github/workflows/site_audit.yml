@@ -53,8 +53,7 @@ jobs:
               echo
               echo "Codex audit was skipped because OPENAI_API_KEY is not set."
               echo "Run Codex locally with:"
-              echo '
-```bash'
+              echo '```bash'
               echo 'codex run "Read the repository and execute audits/lab_website_quality_audit.md"'
               echo '```'
             } > "$REPORT"
