@@ -14,3 +14,7 @@ title: "リンク / Links"
 | 九州大学マテリアル先端リサーチインフラ<br>Advanced Research Infrastructure for Materials and Nanotechnology (ARIM) | [https://nano.kyushu-u.ac.jp/arim/](https://nano.kyushu-u.ac.jp/arim/) |
 | 理化学研究所計算科学研究機構 (R-CCS)<br>RIKEN Center for Computational Science | [https://www.r-ccs.riken.jp](https://www.r-ccs.riken.jp)     |
 | （旧）計算科学研究機構 (AICS)<br>RIKEN Advanced Institute for Computational Science | [https://aics.riken.jp/jp/index.html](https://aics.riken.jp/jp/index.html) |
+| 九州大学数理・データサイエンス教育研究センター<br>Center for Mathematics-and-Data-Science Education and Research (MDS) | [https://mds.kyushu-u.ac.jp/](https://mds.kyushu-u.ac.jp/) |
+| 九州大学マス・フォア・インダストリー研究所 (IMI)<br>Institute of Mathematics for Industry | [https://www.imi.kyushu-u.ac.jp/](https://www.imi.kyushu-u.ac.jp/) |
+| 九州大学共創学部<br>School of Interdisciplinary Science and Innovation | [https://www.kyoso.kyushu-u.ac.jp/](https://www.kyoso.kyushu-u.ac.jp/) |
+| 九州大学農学部<br>Faculty of Agriculture | [https://www.agr.kyushu-u.ac.jp/](https://www.agr.kyushu-u.ac.jp/) |
