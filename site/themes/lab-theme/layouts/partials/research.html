@@ -1,0 +1,24 @@
+<section class="section-block">
+  <h2>研究ハイライト / Research Highlights</h2>
+
+  <div class="research-stack">
+    {{ $highlights := sort (where (where .Site.RegularPages "Section" "research") "Params.top_highlight" true) "Date" "desc" }}
+    {{ range first 5 $highlights }}
+      {{ $page := . }}
+      <article class="card research-card">
+        <a class="research-card-media" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+          {{ with .Params.thumbnail }}
+            <img src="{{ . }}" alt="{{ $page.Title }} thumbnail">
+          {{ else }}
+            <div class="research-card-placeholder">Research</div>
+          {{ end }}
+        </a>
+        <div class="research-card-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ with .Summary }}{{ . }}{{ else }}{{ .Plain | truncate 140 }}{{ end }}</p>
+          <a href="{{ .RelPermalink }}">詳細を見る / Learn more</a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>

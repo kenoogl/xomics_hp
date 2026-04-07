@@ -1,0 +1,18 @@
+<section class="section-block">
+  <h2>ニュース / News</h2>
+
+  <div class="news-teasers">
+    {{ range first 5 (sort (where .Site.RegularPages "Section" "news") "Date" "desc") }}
+      <article class="news-teaser">
+        <p class="meta">{{ .Date.Format "2006-01-02" }}</p>
+        <p>
+          <a href="{{ .RelPermalink }}">
+            {{ with .Summary }}{{ . | plainify | truncate 120 }}{{ else }}{{ .Plain | truncate 120 }}{{ end }}
+          </a>
+        </p>
+      </article>
+    {{ end }}
+  </div>
+
+  <p class="news-more-link"><a href="{{ "/news/" | relURL }}">ニュース一覧を見る / View all news</a></p>
+</section>

@@ -1,0 +1,51 @@
+{{ define "main" }}
+<section>
+  <h1>{{ .Title }}</h1>
+  <div class="section-intro">
+    {{ .Content }}
+    {{ with .Params.acknowledgements }}{{ . | markdownify }}{{ end }}
+  </div>
+  {{ if eq .Section "reports" }}
+    <div class="reports-section">
+      {{ if not (eq .Parent.Section "reports") }}
+        {{/* Top level: List fiscal years */}}
+        <div class="reports-fy-nav">
+          <ul class="clean-list">
+            {{ range .Sections.ByTitle.Reverse }}
+              <li class="fy-link-item">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ else }}
+        {{/* FY level: List reports for that year */}}
+        <div class="reports-list">
+          <ul class="clean-list">
+            {{ range .Pages.ByDate.Reverse }}
+              <li class="report-item">
+                <a href="{{ .RelPermalink }}" class="report-title">{{ .Title }}</a>
+                {{ with .Params.authors }}
+                  <div class="report-authors meta">{{ . }}</div>
+                {{ end }}
+                {{ if .Params.journal }}
+                  <div class="report-venue meta"><em>{{ .Params.journal }}</em>{{ if .Params.year }}, {{ .Params.year }}{{ end }}</div>
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </div>
+  {{ else }}
+    <ul class="clean-list">
+      {{ range .Pages.ByDate.Reverse }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ if .Date }}<span class="meta">{{ .Date.Format "2006-01-02" }}</span>{{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</section>
+{{ end }}

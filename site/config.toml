@@ -1,0 +1,42 @@
+baseURL = "http://localhost:8080/"
+title = "Pan-Omics Data-Driven Innovation Center"
+theme = "lab-theme"
+defaultContentLanguage = "ja"
+
+[params]
+  description = "Pan-Omics Data-Driven Innovation Center"
+  subtitle_ja = "計測・データ科学・スパコン・モデリングの全学融合を目指して"
+  subtitle_en = "Towards Fusion of Measurement, Data Science, HPC and Modelling for all disciplines"
+
+[menu]
+  [[menu.main]]
+    name = "About X-Omics"
+    url = "/about/"
+    weight = 1
+  [[menu.main]]
+    name = "Research"
+    url = "/research/"
+    weight = 3
+  [[menu.main]]
+    name = "Reports"
+    url = "/reports/"
+    weight = 4
+  [[menu.main]]
+    name = "Links"
+    url = "/links/"
+    weight = 5
+  [[menu.main]]
+    name = "News"
+    url = "/news/"
+    weight = 6
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['$$', '$$'], ['\\[', '\\]']]
+          inline = [['$', '$'], ['\\(', '\\)']]
+    [markup.goldmark.renderer]
+      unsafe = true

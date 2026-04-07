@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="section-block hero">
+  <h1>{{ .Title }}</h1>
+  <p>研究室の更新情報一覧です。<br>All news and updates from the lab.</p>
+</section>
+
+<section class="section-block">
+  <div class="news-archive">
+    {{ range (.Pages.ByDate.Reverse.GroupByDate "2006") }}
+      <section class="news-year-block">
+        <h2>{{ .Key }}</h2>
+        {{ range .Pages }}
+          <article class="news-entry">
+            {{ if .Date }}<p class="meta">{{ .Date.Format "2006-01-02" }}</p>{{ end }}
+            <div class="content">{{ .Content }}</div>
+          </article>
+        {{ end }}
+      </section>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

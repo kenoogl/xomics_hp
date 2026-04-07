@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{ $memberPages := where .Site.RegularPages "Section" "members" }}
+{{ $currentPages := where $memberPages "File.BaseFileName" "current-members" }}
+{{ $alumniPages := where $memberPages "File.BaseFileName" "alumni-members" }}
+
+<section class="section-block hero members-hero">
+  <h1>メンバー / Members</h1>
+  <p>研究室の構成メンバーと卒業生情報です。<br>Current laboratory members and alumni records.</p>
+</section>
+
+<section class="section-block" id="current-members">
+  <h2>現在のメンバー / Current Members</h2>
+  {{ if gt (len $currentPages) 0 }}
+    <div class="members-content">
+      {{ (index $currentPages 0).Content }}
+    </div>
+  {{ else }}
+    <p class="meta">Current member data is not available.</p>
+  {{ end }}
+</section>
+
+<section class="section-block" id="alumni">
+  <h2>卒業生 / Alumni</h2>
+  {{ if gt (len $alumniPages) 0 }}
+    <div class="members-content">
+      {{ (index $alumniPages 0).Content }}
+    </div>
+  {{ else }}
+    <p class="meta">Alumni data is not available.</p>
+  {{ end }}
+</section>
+{{ end }}

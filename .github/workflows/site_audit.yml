@@ -1,0 +1,93 @@
+name: monthly site audit
+
+on:
+  schedule:
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      HUGO_VERSION: "0.151.0"
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Hugo
+        run: |
+          set -euo pipefail
+          HUGO_DEB="hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          curl -fsSL -o "/tmp/${HUGO_DEB}" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_DEB}"
+          sudo dpkg -i "/tmp/${HUGO_DEB}"
+          hugo version
+
+      - name: Run lightweight baseline checks
+        run: |
+          python scripts/validate_content.py
+          cd site && TZ=Asia/Tokyo hugo --destination ../public --cleanDestinationDir
+          cd ..
+          python scripts/check_markdown_validity.py --root .
+          python scripts/check_internal_links.py --public-dir public
+          oversized=$(find site/static/images -type f -size +500k || true)
+          if [ -n "$oversized" ]; then
+            echo "Images over 500KB:" && echo "$oversized"
+            exit 1
+          fi
+
+      - name: Run Codex full audit
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          mkdir -p reports
+          REPORT="reports/monthly_site_audit_$(date -u +%F).md"
+
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            {
+              echo "# Monthly Site Audit"
+              echo
+              echo "Date (UTC): $(date -u +%F)"
+              echo
+              echo "Codex audit was skipped because OPENAI_API_KEY is not set."
+              echo "Run Codex locally with:"
+              echo '
+```bash'
+              echo 'codex run "Read the repository and execute audits/lab_website_quality_audit.md"'
+              echo '```'
+            } > "$REPORT"
+            exit 0
+          fi
+
+          if ! command -v codex >/dev/null 2>&1; then
+            npm install -g @openai/codex || true
+          fi
+
+          if ! command -v codex >/dev/null 2>&1; then
+            {
+              echo "# Monthly Site Audit"
+              echo
+              echo "Date (UTC): $(date -u +%F)"
+              echo
+              echo "Codex CLI is unavailable in this runner."
+              echo "Install Codex CLI or run the audit locally."
+            } > "$REPORT"
+            exit 0
+          fi
+
+          codex run "Read the repository and execute the instructions in audits/lab_website_quality_audit.md. Output a full audit report in markdown." > "$REPORT"
+
+      - name: Upload audit report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-site-audit
+          path: reports/monthly_site_audit_*.md
+
+      - name: Commit and push report
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add reports/monthly_site_audit_*.md
+          git commit -m "monthly site audit report" || echo "No report changes to commit"
+          git push

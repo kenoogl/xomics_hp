@@ -1,0 +1,73 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ if and (eq .Section "publications") (.Params.pub_type_filter) }}
+    {{ with .Content }}<div class="section-intro">{{ . }}</div>{{ end }}
+    {{ $all := where (where .Site.RegularPages "Section" "publications") "Params.pub_type_filter" nil }}
+    {{ $filter := .Params.pub_type_filter }}
+    {{ $list := slice }}
+    {{ if eq $filter "journal" }}
+      {{ $list = where $all "Params.pub_type" "journal" }}
+    {{ else if eq $filter "international-conference" }}
+      {{ $list = union (where $all "Params.pub_type" "international-conference") (where $all "Params.pub_type" "international_conference") }}
+    {{ else if eq $filter "domestic-conference" }}
+      {{ $list = union (where $all "Params.pub_type" "domestic-conference") (where $all "Params.pub_type" "domestic_conference") }}
+    {{ else if eq $filter "others" }}
+      {{ $list = union (where $all "Params.pub_type" "others") (where $all "Params.pub_type" "talk") }}
+      {{ $list = union $list (where $all "Params.pub_type" nil) }}
+    {{ end }}
+    {{ $list = $list.ByDate.Reverse }}
+    {{ if gt (len $list) 0 }}
+      {{ range ($list.GroupByDate "2006") }}
+        <h2>{{ .Key }}</h2>
+        <ul class="clean-list">
+          {{ range .Pages }}
+            <li>
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              {{ if eq .Params.peer_reviewed true }} <span class="meta">(Refereed)</span>{{ end }}
+              {{ if eq .Params.peer_reviewed "true" }} <span class="meta">(Refereed)</span>{{ end }}
+              {{ if and (eq .Params.pub_type "talk") (eq (lower (printf "%v" .Params.annote)) "invited") }} <span class="meta">(Invited talk)</span>{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ else }}
+      <p class="meta">No entries.</p>
+    {{ end }}
+  {{ else }}
+  {{ if or .Params.authors .Params.journal .Params.peer_reviewed }}
+    {{ with .Params.authors }}<p class="meta"><strong>Authors:</strong> {{ . }}</p>{{ end }}
+    {{ with .Params.journal }}
+      {{ if eq $.Params.pub_type "journal" }}
+        <p class="meta"><strong>Journal:</strong> {{ . }}</p>
+      {{ else if or (eq $.Params.pub_type "international-conference") (eq $.Params.pub_type "domestic-conference") }}
+        <p class="meta"><strong>Conference:</strong> {{ . }}</p>
+      {{ else if eq $.Params.pub_type "talk" }}
+        <p class="meta"><strong>Talk:</strong> {{ . }}</p>
+      {{ else }}
+        <p class="meta"><strong>Source:</strong> {{ . }}</p>
+      {{ end }}
+    {{ end }}
+    {{ with .Params.doi }}<p class="meta"><strong>DOI:</strong> {{ . }}</p>{{ end }}
+    {{ with .Params.doi_url }}<p class="meta"><strong>URL:</strong> <a href="{{ . }}">{{ . }}</a></p>{{ end }}
+    {{ if and (not .Params.doi_url) .Params.url }}<p class="meta"><strong>URL:</strong> <a href="{{ .Params.url }}">{{ .Params.url }}</a></p>{{ end }}
+    {{ if and (eq .Params.pub_type "talk") (eq (lower (printf "%v" .Params.annote)) "invited") }}
+      <p class="meta"><strong>Talk Type:</strong> Invited talk</p>
+    {{ end }}
+    {{ if or (eq .Params.pub_type "international-conference") (eq .Params.pub_type "domestic-conference") }}
+      {{ if eq .Params.peer_reviewed true }}<p class="meta"><strong>Peer Review:</strong> Refereed</p>{{ end }}
+      {{ if eq .Params.peer_reviewed "true" }}<p class="meta"><strong>Peer Review:</strong> Refereed</p>{{ end }}
+      {{ if eq .Params.peer_reviewed false }}<p class="meta"><strong>Peer Review:</strong> Non-Refereed</p>{{ end }}
+      {{ if eq .Params.peer_reviewed "false" }}<p class="meta"><strong>Peer Review:</strong> Non-Refereed</p>{{ end }}
+    {{ end }}
+    {{ if and (or (eq .Params.pub_type "journal") (eq .Params.pub_type "international-conference") (eq .Params.pub_type "international_conference")) .Params.abstract }}
+      <h2>Abstract</h2>
+      <p>{{ .Params.abstract }}</p>
+    {{ end }}
+  {{ else }}
+    {{ if .Date }}<p class="meta">{{ .Date.Format "2006-01-02" }}</p>{{ end }}
+  {{ end }}
+  <div class="content">{{ .Content }}</div>
+  {{ end }}
+</article>
+{{ end }}

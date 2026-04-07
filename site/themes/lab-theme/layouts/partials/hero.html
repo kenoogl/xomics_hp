@@ -1,0 +1,12 @@
+<section class="hero section-block">
+  <h1><a class="hero-title-link" href="{{ "/about/" | relURL }}">{{ .Site.Title }}</a></h1>
+  <p>
+    {{ .Site.Params.subtitle_ja }}<br>
+    {{ .Site.Params.subtitle_en }}
+  </p>
+</section>
+
+<p class="hero-updated">
+  <span class="hero-updated-label">最終更新 / Last updated</span>
+  <span class="hero-updated-time">{{ now.Format "2006-01-02 15:04 JST" }}</span>
+</p>

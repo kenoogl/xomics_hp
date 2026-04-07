@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Wake modeling illustration">
+  <rect width="800" height="360" fill="#eff5ff"/>
+  <circle cx="170" cy="180" r="70" fill="#0b4da2" opacity="0.85"/>
+  <path d="M250 140 C360 80, 530 80, 700 120" stroke="#0b4da2" stroke-width="10" fill="none" opacity="0.7"/>
+  <path d="M250 180 C380 130, 560 135, 740 180" stroke="#2f6fc0" stroke-width="10" fill="none" opacity="0.6"/>
+  <path d="M250 220 C380 200, 580 220, 760 250" stroke="#5f8dcf" stroke-width="10" fill="none" opacity="0.55"/>
+</svg>

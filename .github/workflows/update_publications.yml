@@ -1,0 +1,63 @@
+name: update publications
+
+on:
+  schedule:
+    - cron: "0 2 * * 0"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+    env:
+      HUGO_VERSION: "0.151.0"
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install scholarly bibtexparser
+
+      - name: Fetch Scholar BibTeX
+        env:
+          SCHOLAR_AUTHOR_ID: ${{ secrets.SCHOLAR_AUTHOR_ID }}
+        run: |
+          if [ -z "$SCHOLAR_AUTHOR_ID" ]; then
+            echo "SCHOLAR_AUTHOR_ID is not set; skipping fetch step."
+          else
+            python scripts/scholar_fetch.py --author-id "$SCHOLAR_AUTHOR_ID" --output data/publications/generated.bib
+          fi
+
+      - name: Convert BibTeX to Markdown
+        run: python scripts/bibtex_to_markdown.py --clean
+
+      - name: Validate content conventions
+        run: python scripts/validate_content.py
+
+      - name: Install Hugo
+        run: |
+          set -euo pipefail
+          HUGO_DEB="hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          curl -fsSL -o "/tmp/${HUGO_DEB}" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_DEB}"
+          sudo dpkg -i "/tmp/${HUGO_DEB}"
+          hugo version
+
+      - name: Build Hugo output
+        run: |
+          cd site
+          TZ=Asia/Tokyo hugo --destination ../public --cleanDestinationDir
+
+      - name: Commit and push updates
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/publications site/content/publications
+          git commit -m "update publications" || echo "No changes to commit"
+          git push
