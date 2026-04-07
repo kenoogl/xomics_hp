@@ -4,7 +4,7 @@ set -euo pipefail
 : "${DEPLOY_HOST:?DEPLOY_HOST is required}"
 : "${DEPLOY_USER:?DEPLOY_USER is required}"
 
-DEPLOY_PORT="${DEPLOY_PORT:-22}"
+DEPLOY_PORT="${DEPLOY_PORT:-10022}"
 TARGET_DIR="${PRODUCTION_TARGET_DIR:-/var/www/clam}"
 SSH_OPTS="-p ${DEPLOY_PORT} -o StrictHostKeyChecking=no"
 
