@@ -1,10 +1,10 @@
 baseURL = "http://localhost:8080/"
-title = "Pan-Omics Data-Driven Innovation Center"
+title = "Pan-Omics Data-Driven Innovation Research Center"
 theme = "lab-theme"
 defaultContentLanguage = "ja"
 
 [params]
-  description = "Pan-Omics Data-Driven Innovation Center"
+  description = "Pan-Omics Data-Driven Innovation Research Center"
   subtitle_ja = "計測・データ科学・スパコン・モデリングの全学融合を目指して"
   subtitle_en = "Towards Fusion of Measurement, Data Science, HPC and Modelling for all disciplines"
 

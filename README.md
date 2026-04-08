@@ -1,4 +1,4 @@
-# Pan-Omics Data-Driven Innovation Center Website
+# Pan-Omics Data-Driven Innovation Research Center Website
 
 Hugo で構築した研究室向け静的Webサイトです。  
 本番公開は **Ubuntu + Apache2**、GitHub を唯一の正本として運用します。
