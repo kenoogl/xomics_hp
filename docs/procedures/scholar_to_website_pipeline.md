@@ -148,7 +148,7 @@ hugo --destination ../public --cleanDestinationDir
 
 ```text
 GitHub Actions -> rsync/scp -> /var/www/mercury-staging（develop）
-GitHub Actions -> rsync/scp -> /var/www/html（main）
+GitHub Actions -> rsync/scp -> /var/www/clam（main）
 ```
 
 公開先:

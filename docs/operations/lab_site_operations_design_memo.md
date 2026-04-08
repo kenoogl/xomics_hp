@@ -125,7 +125,7 @@ Ubuntu 側は **配信専用**に寄せるのが安全です。
 
 ```text
 /var/www/
-  ├─ html/            ← production
+  ├─ clam/            ← production
   └─ mercury-staging/ ← staging（任意）
 ```
 
@@ -134,9 +134,9 @@ VirtualHost 例:
 ```apache
 <VirtualHost *:80>
     ServerName mercury.cc.kyushu-u.ac.jp
-    DocumentRoot /var/www/html
+    DocumentRoot /var/www/clam
 
-    <Directory /var/www/html>
+    <Directory /var/www/clam>
         Options FollowSymLinks
         AllowOverride None
         Require all granted
@@ -155,7 +155,7 @@ VirtualHost 例:
 
 ```text
 staging.mercury.cc.kyushu-u.ac.jp -> /var/www/mercury-staging
-mercury.cc.kyushu-u.ac.jp         -> /var/www/html
+mercury.cc.kyushu-u.ac.jp         -> /var/www/clam
 ```
 
 ブランチ対応:
@@ -203,7 +203,7 @@ main へ反映
 
 ## 8. Apache2 側の運用ポリシー
 
-- `/var/www/html` は配信専用
+- `/var/www/clam` は配信専用
 - サーバ上で直接編集しない
 - 変更は必ず GitHub 経由
 - `sites-available` で管理
@@ -241,7 +241,7 @@ main へ反映
 GitHub が事実上のバックアップです。加えて以下を定期バックアップします。
 
 - Apache 設定
-- `/var/www/html` と staging 配下
+- `/var/www/clam` と staging 配下
 - 証明書設定
 - デプロイスクリプト
 

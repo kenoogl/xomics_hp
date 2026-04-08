@@ -92,7 +92,7 @@
 
 ### 4.4 Deployment
 - FR-301: Apache2は `public/` の静的ファイルのみを配信する。
-- FR-302: production の `DocumentRoot` は `/var/www/html` を基準とする。
+- FR-302: production の `DocumentRoot` は `/var/www/clam` を基準とする。
 - FR-303: `develop` は staging、`main` は production へ GitHub Actions から rsync/scp で配信する。
 - FR-304: サーバ側反映前に `apache2ctl configtest` を実行し、成功時のみ reload する。
 - FR-305: `deploy_staging.yml` と `deploy_production.yml` は `site_checks.yml` 成功後にのみ実行する。

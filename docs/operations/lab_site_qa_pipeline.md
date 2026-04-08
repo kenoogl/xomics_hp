@@ -61,7 +61,7 @@ Implementation scripts:
 - `main` push:
   - Run lightweight checks
   - `site checks` 成功後に deploy workflow が起動
-  - Deploy generated `public/` to production (`/var/www/html`)
+  - Deploy generated `public/` to production (`/var/www/clam`)
 
 Deploy transport:
 - `rsync` or `scp` over SSH from GitHub Actions
