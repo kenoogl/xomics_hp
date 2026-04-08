@@ -2,4 +2,4 @@
 title: "Home"
 ---
 
-Welcome to the Intelligent Modeling Laboratory (IML) website template.
+Welcome to Pan-Omics Data-Driven Innovation Research Center.
